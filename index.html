@@ -3,13 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Countdown to the meme from the future">
     <title>Countdown</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
 
     <style>
+        * {
+            padding: 0%;
+            margin: 0%;
+        }
+
         body {
             background: #43cea2;
             /* fallback for old browsers */
@@ -17,7 +22,16 @@
             /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #185a9d, #43cea2);
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            text-align: center;
+        }
 
+        h1 {
+            margin: 30px 0 20px 0;
+            text-align: center;
+            color: white;
+            font-size: 50px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
         }
 
         .countdown {
@@ -46,7 +60,7 @@
         }
 
         .label {
-            margin: auto;
+
             text-align: center;
 
         }
@@ -59,14 +73,75 @@
             color: white;
             text-align: left;
             width: 118px;
-            height: 125px;
+
             padding: 3px 29px;
-            margin: 0 8px;
+            margin: 0 8px 20px 8px;
+        }
+
+        .prev {
+            display: inline-block;
+            background: rgba(40, 50, 61, .62);
+            font-family: 'Roboto', sans-serif;
+            font-size: 27px;
+            font-weight: 300;
+            color: white;
+            padding: 3px 29px;
+            margin: auto 10px;
+            text-align: center;
+            border-radius: 8px;
+
+        }
+
+        .prevt {
+            display: inline-block;
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            color: white;
+            padding: 3px 48px;
+            margin: auto 10px;
+            text-align: left;
+        }
+
+        .footerright {
+            margin: -20px 20px 20px 0;
+            text-align: right;
+            color: whitesmoke;
+        }
+
+        footer {
+            background: #e53935;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #e35d5b, #e53935);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #e35d5b, #e53935);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            font-family: 'Roboto', sans-serif;
+            position: fixed;
+            bottom: 0;
+            width: 100%
+        }
+
+        .footerleft {
+            margin: 20px 0 0 20px;
+            text-align: left;
+            color: whitesmoke;
+        }
+
+        footer i {
+            color: maroon;
+        }
+
+        .accented-anchor {
+            color: #0396D1;
+            text-decoration: none;
         }
     </style>
 </head>
 
 <body>
+    <h1>Countdown to the Meme from the Future</h1>
     <div class="countdown">
         <div class="clock" id="day"></div>
         <div class="clock" id="hour"></div>
@@ -80,9 +155,28 @@
         <div class="clockt">SECONDS</div>
     </div>
     <div>
-        <div id="previous"></div>
-        <div id="next"></div>
+        <div class='prevt'>Previous Countdown</div>
+        <div class='prevt'>This Countdown to</div>
     </div>
+
+    <div>
+        <div class='prev' id="previous"></div>
+        <div class='prev' id="next"></div>
+    </div>
+    <footer>
+        <div class="footerleft">
+            &copy;Umar Alam<br /> Designed by
+            <a href="https://sites.google.com/miet.ac.in/umaralam/home" class="accented-anchor" target="_blank">Umar
+                Alam</a><br /> Source code licensed under
+            <a href="http://www.apache.org/licenses/" class="accented-anchor" target="_blank">
+                Apache License</a>
+        </div><br>
+        <div class="footerright">
+            View <a href="https://github.com/umaralam48/mobicom_2018" class="accented-anchor" target="_blank">source
+                code</a> on Github
+        </div>
+
+    </footer>
     <script>
         function fibsum(n) {
             var a = 0, b = 1;
@@ -113,8 +207,8 @@
             countDownDate = countDownDate + fibsum(n++) * 24 * 60 * 60 * 1000;
             // console.log(new Date(countDownDate));
         }
-        document.getElementById("previous").innerHTML = new Date(prev);
-        document.getElementById("next").innerHTML = new Date(countDownDate);
+        document.getElementById("previous").innerHTML = (new Date(prev)).toDateString();
+        document.getElementById("next").innerHTML = (new Date(countDownDate)).toDateString();
         // Update the count down every 1 second
         var x = setInterval(function () {
 
@@ -130,8 +224,8 @@
                 countDownDate = countDownDate + fibsum(n) * 24 * 60 * 60 * 1000;
                 //console.log(countDownDate);
                 distance = countDownDate - now;
-                document.getElementById("previous").innerHTML = new Date(prev);
-                document.getElementById("next").innerHTML = new Date(countDownDate);
+                document.getElementById("previous").innerHTML = (new Date(prev)).toDateString();
+                document.getElementById("next").innerHTML = (new Date(countDownDate)).toDateString();
             }
             // Time calculations for days, hours, minutes and seconds
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
