@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Countdown to the meme from the future">
+    <title>Countdown</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+
+    <style>
+        body {
+            background: #43cea2;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #185a9d, #43cea2);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #185a9d, #43cea2);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        .countdown {
+            margin: auto;
+            text-align: center;
+
+        }
+
+        .clock {
+            display: inline-block;
+            background: rgba(40, 50, 61, .62);
+            font-family: 'Roboto', sans-serif;
+            font-size: 107px;
+            font-weight: 300;
+            color: white;
+            padding: 3px 29px;
+            width: 118px;
+            height: 125px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 8px 10px 8px;
+        }
+
+        #sec {
+            color: #e55182;
+        }
+
+        .label {
+            margin: auto;
+            text-align: center;
+
+        }
+
+        .clockt {
+            display: inline-block;
+            font-family: 'Roboto', sans-serif;
+            font-size: 30px;
+            font-weight: 400;
+            color: white;
+            text-align: left;
+            width: 118px;
+            height: 125px;
+            padding: 3px 29px;
+            margin: 0 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="countdown">
+        <div class="clock" id="day"></div>
+        <div class="clock" id="hour"></div>
+        <div class="clock" id="min"></div>
+        <div class="clock" id="sec">8</div>
+    </div>
+    <div class="label">
+        <div class="clockt">DAYS</div>
+        <div class="clockt">HOURS</div>
+        <div class="clockt">MINUTES</div>
+        <div class="clockt">SECONDS</div>
+    </div>
+    <div>
+        <div id="previous"></div>
+        <div id="next"></div>
+    </div>
+    <script>
+        function fibsum(n) {
+            var a = 0, b = 1;
+            var c = 0;
+            if (n == 1)
+                return 0;
+            else if (n == 2)
+                return 1;
+            else {
+                for (var i = 3; i <= n; i++) {
+                    c = a + b;
+                    a = b;
+                    b = c;
+                }
+                console.log(c);
+                return c;
+            }
+        };
+        // Set the date we're counting down to
+        var fixeddate = new Date("Oct 23, 2018 13:20:25").getTime();
+        var currentdate = new Date().getTime();
+        //var currentdate = new Date("Dec 1, 2018 13:20:15").getTime(); TESTING
+        //var now = currentdate; TESTING
+        var countDownDate = fixeddate;
+        var n = 1; var prev;
+        while (countDownDate < currentdate) {
+            prev = countDownDate;
+            countDownDate = countDownDate + fibsum(n++) * 24 * 60 * 60 * 1000;
+            // console.log(new Date(countDownDate));
+        }
+        document.getElementById("previous").innerHTML = new Date(prev);
+        document.getElementById("next").innerHTML = new Date(countDownDate);
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get todays date and time
+            var now = new Date().getTime();
+            //now = now + 1000; TESTING
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+            // console.log('distance', distance);
+            if (distance <= 0) {
+                prev = countDownDate;
+                countDownDate = countDownDate + fibsum(n) * 24 * 60 * 60 * 1000;
+                //console.log(countDownDate);
+                distance = countDownDate - now;
+                document.getElementById("previous").innerHTML = new Date(prev);
+                document.getElementById("next").innerHTML = new Date(countDownDate);
+            }
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.round((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the elements
+            document.getElementById("day").innerHTML = days;
+            document.getElementById("hour").innerHTML = hours;
+            document.getElementById("min").innerHTML = minutes;
+            document.getElementById("sec").innerHTML = seconds;
+
+            // If the count down is finished, write some text 
+
+        }, 1000);
+    </script>
+</body>
+
+</html>
